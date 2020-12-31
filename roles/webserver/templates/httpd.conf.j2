@@ -1,0 +1,24 @@
+<VirtualHost *:{{ http_port }}>
+   ServerAdmin webmaster@localhost
+   ServerName 34.123.242.217
+   ServerAlias 34.123.242.217/var/www/html/tooling/html/
+   DocumentRoot /var/www/html/tooling/html/
+   ErrorLog /var/www/html/tooling/html/error.log
+   CustomLog /var/www/html/tooling/html/requests.log combined
+
+   <Directory />
+      AllowOverride None
+      Require all denied
+   </Directory>
+
+   <Directory "/var/www/html/tooling/html">
+     AllowOverride None
+     Require all granted
+   </Directory>
+
+   <IfModule mod_dir.c>
+       DirectoryIndex login.php index.php index.html index.cgi index.pl  index.xhtml index.htm
+   </IfModule>
+
+</VirtualHost>
+

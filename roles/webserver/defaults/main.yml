@@ -1,0 +1,13 @@
+---
+# defaults file for webservers
+
+#http_host: "domain"
+http_conf: "your_domain.conf"
+http_port: "80"
+disable_default: true
+
+tooling_db_username: "admin"
+tooling_db_password: "admin"
+tooling_db_ip: "34.123.242.217"
+tooling_db_name: "tooling"
+templating_functions: "functions.php"

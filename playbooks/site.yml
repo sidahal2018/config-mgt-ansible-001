@@ -1,0 +1,12 @@
+#- hosts: all
+- import_playbook: ../static-assignments/common.yml
+- hosts: webservers
+- import_playbook: ../static-assignments/webservers.yml
+
+- hosts: db
+- import_playbook: ../roles/mysql.yml
+
+- name: Loadbalancers assignment
+- hosts: lb
+- import_playbook: ../static-assignments/loadbalancers.yml
+  when: load_balancer_is_required 

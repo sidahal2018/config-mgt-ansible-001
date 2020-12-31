@@ -1,0 +1,9 @@
+---
+
+- name: clone tooling website from github
+  git:
+   repo: https://github.com/darey-io/tooling.git
+   dest: /var/www/html/tooling
+   clone: yes
+   force: yes
+

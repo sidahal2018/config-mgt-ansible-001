@@ -1,0 +1,31 @@
+---
+- name: Creating MySQL user for toooling website
+  mysql_user:
+    name: "{{ tooling_db_username }}"
+    password: "{{ tooling_db_password }}"
+    priv: "{{ tooling_db_name }}.*:ALL"
+    state: present
+
+- name: Creatinng new database
+  mysql_db:
+    name: "{{ tooling_db_name }}"
+    state: present
+
+- name: Create target directory
+  file: 
+   path: /temp
+   state: directory 
+   mode: 0755
+
+- name: copy the sql file onto the server
+  copy:
+   src: tooling-db.sql
+   dest: /temp/tooling-db.sql
+
+- name: Restoring DB
+  mysql_db:
+    name: "{{ tooling_db_name }}"
+    login_user: "{{ tooling_db_username }}"
+    login_password: "{{ tooling_db_password }}"
+    state: import
+    target: /temp/tooling-db.sql
