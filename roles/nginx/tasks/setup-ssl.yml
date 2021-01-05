@@ -2,9 +2,9 @@
 - name : Install Python Package
   yum: name=python3 update_cache=yes state=latest
  
-  - name : Install Let's Encrypt Package
-    package: name={{ certbot_package }} update_cache=yes state=latest
+- name : Install Let's Encrypt Package
+  package: name={{ certbot_package }} update_cache=yes state=latest
  
-  - name: Create and Install Cert Using {{ certbot_plugin }} Plugin
-    command: "certbot --{{ certbot_plugin }} -d  {{ certbot_site_names[inventory_hostname_short] }} -m {{ certbot_mail_address }} --agree-tos --noninteractive --redirect"
+- name: Create and Install Cert Using {{ certbot_plugin }} Plugin
+  command: "certbot --{{ certbot_plugin }} -d  {{ certbot_site_names[inventory_hostname_short] }} -m {{ certbot_mail_address }} --agree-tos --noninteractive --redirect"
  

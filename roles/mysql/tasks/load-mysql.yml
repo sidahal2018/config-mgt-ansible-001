@@ -29,3 +29,5 @@
     login_password: "{{ tooling_db_password }}"
     state: import
     target: /temp/tooling-db.sql
+  tags:
+    - restore_db

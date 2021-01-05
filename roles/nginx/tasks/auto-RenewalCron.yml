@@ -1,4 +1,4 @@
 ---
 - name: Set Letsencrypt Cronjob for Certificate Auto Renewal
-    cron: name=letsencrypt_renewal special_time=monthly job="/usr/bin/certbot renew"
-    when: ansible_facts['os_family'] == "RedHat"
+  cron: name=letsencrypt_renewal special_time=monthly job="/usr/bin/certbot renew"
+  when: ansible_facts['os_family'] == "RedHat"

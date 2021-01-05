@@ -6,10 +6,9 @@
     owner: apache
     group: apache
     mode: 0644
-    
+  
 
-
-- name: copying function. php to the webserver
+- name: copying function.php to the webserver
   template:
    src: function.php.j2
    dest: /var/www/html/tooling/html/{{ templating_functions }}

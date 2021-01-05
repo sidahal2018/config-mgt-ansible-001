@@ -1,5 +1,5 @@
 certbot_site_names: {
-    host: "sidahal.cf",
+    lb: "sikisharm.ml",
   
  }
  

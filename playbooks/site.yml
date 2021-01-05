@@ -1,8 +1,20 @@
-#- hosts: all
+---
 - import_playbook: ../static-assignments/common.yml
 - hosts: webservers
 - import_playbook: ../static-assignments/webservers.yml
 
 - hosts: db
 - import_playbook: ../roles/mysql.yml
- 
+
+- hosts: jenkins
+- import_playbook: ../roles/java.yml
+- import_playbook: ../roles/jenkins.yml
+
+- hosts: all
+- include_playbook: ../dynamic-assignments/env-vars.yml
+  tags:
+    - always
+
+- hosts: lb
+- include_playbook: ../static-assignments/loadbalancers.yml
+  when: load_balancer_is_required
