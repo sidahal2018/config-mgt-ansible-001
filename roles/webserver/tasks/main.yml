@@ -2,7 +2,7 @@
 # tasks file for webserver
 - name: install packages
   include: installpkg.yml
-- name: Set up Apache virtual Host
+- name: Setup/confgigure httpd
   include: configureapache.yml
 - name: clone tooling website
   include: deploytooling.yml

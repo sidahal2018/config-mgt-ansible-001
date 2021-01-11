@@ -1,22 +1,68 @@
 ---
+- name: Creating sites-available directory on host for for httpd
+  file:
+    path:  /etc/httpd/sites-available
+    state: directory
+    mode: '0755'
+
+- name: Creating  sites-enabled directory on host for httpd
+  file:
+    path:  /etc/httpd/sites-enabled
+    state: directory
+    mode: '0755'
+
+
+- name: de-activate default httpd page
+  file:
+    path: /etc/httpd/conf/httpd.conf
+    mode: '0755'
+    state: absent
+  notify:
+   - restart httpd service
+
 - name: Set up Apache virtuahHost
   template:
     src: httpd.conf.j2
-    dest: /etc/httpd/conf/{{ http_conf }}
-    owner: apache
-    group: apache
-    mode: 0644
+    dest: /etc/httpd/sites-available/{{ http_host }}.conf
+   
+- name: Enable tooling website
+  file:
+    src: "/etc/httpd/sites-available/{{ http_host }}"
+    dest: "/etc/httpd/sites-enabled/{{ http_host }}"
+    state: link
+    force: yes
+  notify:
+   - restart httpd service
+
+
+
+# - name: Add enabled Nginx site to /etc/hosts
+#   lineinfile:
+#     dest: /etc/hosts
+#     regexp: "127.0.0.1"
+#     line: "35.222.190.156 {{ server_name }}"
+
+
+
+
+
+
+
+
+
+
+
   
 
-- name: copying function.php to the webserver
-  template:
-   src: function.php.j2
-   dest: /var/www/html/tooling/html/{{ templating_functions }}
-   owner: root
-   group: root
-   mode: 0600
+# - name: copying function.php to the webserver
+#   template:
+#    src: function.php.j2
+#    dest: /var/www/html/tooling/html/{{ templating_functions }}
+#    owner: root
+#    group: root
+#    mode: 0600
 
-  notify: restart httpd service
+#   notify: restart httpd service
 
 
 

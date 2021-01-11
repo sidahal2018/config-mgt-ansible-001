@@ -9,9 +9,13 @@
   when: nginx_user is not defined
 
 # Setup/install Lets Encrypt SSL and Auto-renewal cronjob
-- include_tasks: setup-ssl.yml
-  when: ansible_os_family == 'RedHat'
-- include_tasks: auto-RenewalCron.yml
+- include_tasks: install-pkg.yml
+- include_tasks: configure_nginx.yml
+# - include_tasks: setup-ssl.yml
+#   when: ansible_os_family == 'RedHat'
+# - include_tasks: auto-RenewalCron.yml
+
+
 
 # Setup/install tasks.
 - include_tasks: setup-RedHat.yml

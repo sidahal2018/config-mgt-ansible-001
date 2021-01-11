@@ -1,8 +1,8 @@
 ---
 # defaults file for webservers
 
-#http_host: "domain"
-http_conf: "your_domain.conf"
+http_host: "sidahal.cf"
+# http_conf: "sidahal.cf.conf"
 http_port: "80"
 disable_default: true
 

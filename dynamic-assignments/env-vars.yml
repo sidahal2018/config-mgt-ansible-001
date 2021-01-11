@@ -2,8 +2,10 @@
 - name: collate variables from env specific file, if it exists
   include_vars: "{{ item }}"
   with_first_found:
-   - files:
-      - "{{ playbook_dir }}/../env_vars/{{ {{ inventory_file }} }}.yml"
-      - "{{ playbook_dir }}/../env_vars/default.yml"
+      - "{{ playbook_dir }}/../env-vars/{{ inventory_file | basename }}.yml"
+      - "{{ playbook_dir }}/../env-vars/default.yml"
   tags:
     - always
+
+# - debug:
+#     msg: Playbook Dir is {{ playbook_dir }} , while Inventory file is --  {{inventory_file | basename }} file is?

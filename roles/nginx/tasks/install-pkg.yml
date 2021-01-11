@@ -1,15 +1,9 @@
 ---
-
-- name: install packages
+- name: install necessary packages
   package: name={{item}} update_cache=yes state=present
   with_items:
-    - epel-release
-    - httpd
     - git
     - php
-    # - mysql-common
+    - mysql-common
     - php-gd
     - php-mysqli
-      
-  notify:
-   - start httpd service

@@ -1,10 +1,26 @@
 ---
-- name : Install Python Package
+- name: Install Python Package
   yum: name=python3 update_cache=yes state=latest
- 
+
+- name: Enable EPEL Repository on CentOS 8
+  dnf: name=epel-release update_cache=yes state=latest
+
+# - name: install certbot
+#   yum: name=certbot state=present
+
 - name : Install Let's Encrypt Package
   package: name={{ certbot_package }} update_cache=yes state=latest
  
-- name: Create and Install Cert Using {{ certbot_plugin }} Plugin
-  command: "certbot --{{ certbot_plugin }} -d  {{ certbot_site_names[inventory_hostname_short] }} -m {{ certbot_mail_address }} --agree-tos --noninteractive --redirect"
- 
+# # free-form (string) arguments, some arguments on separate lines with the 'args' keyword
+# # 'args' is a task keyword, passed at the same level as the module
+# - name: Run command if /path/to/database does not exist (with 'args' keyword)
+#   command: /usr/bin/make_database.sh db_user db_name
+#   args:
+#     creates: /path/to/database
+
+
+# - name: Create and Install Cert 
+#   command: "certbot --{{ certbot_plugin }} -d  {{ server_name }} -m {{ certbot_mail_address }} --agree-tos --noninteractive --redirect"
+#   # args:
+#   #   creates: /path/to/database
+

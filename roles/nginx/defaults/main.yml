@@ -1,4 +1,11 @@
 ---
+# certbot_site_names: "sikisharm.ml"
+server_name: "sikisharm.ml"
+demo_root_dir: /var/www/tooling/html
+certbot_package: "python3-certbot-nginx"
+certbot_plugin: "nginx"
+certbot_mail_address: sidahal@gmail.com
+
 # Used only for Debian/Ubuntu installation, as the -t option for apt.
 
 # variables for Nginx role

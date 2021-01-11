@@ -1,8 +1,2 @@
-certbot_site_names: {
-    lb: "sikisharm.ml",
-  
- }
- 
-certbot_package: "python3-certbot-nginx"
-certbot_plugin: "nginx"
-certbot_mail_address: sidahal@gmail.com
+
+
