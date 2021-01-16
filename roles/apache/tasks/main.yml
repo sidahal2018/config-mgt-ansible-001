@@ -1,4 +1,11 @@
 ---
+# tasks for deploying tooling websites
+- name: install packages
+  include: install-packages.yml
+- name: Setup/confgigure httpd
+  include: configure-apache.yml
+
+
 # Include variables and define needed variables.
 - name: Include OS-specific variables.
   include_vars: "{{ ansible_os_family }}.yml"

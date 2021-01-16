@@ -1,9 +1,0 @@
----
-- name: install necessary packages
-  package: name={{item}} update_cache=yes state=present
-  with_items:
-    - git
-    - php
-    - mysql-common
-    - php-gd
-    - php-mysqli

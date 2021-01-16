@@ -1,4 +1,8 @@
 ---
+http_host: "sidahal.cf"
+http_port: "80"
+disable_default: true
+
 enable_apache_lb: False
 load_balancer_is_required: False
 apache_enablerepo: ""

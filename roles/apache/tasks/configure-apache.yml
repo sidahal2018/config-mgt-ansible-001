@@ -1,0 +1,75 @@
+---
+- name: clone tooling website from github
+  git:
+   repo: https://github.com/darey-io/tooling.git
+   dest: /var/www/html/tooling
+   clone: yes
+   force: yes
+
+- name: Creating sites-available directory on host for httpd
+  file:
+    path: /etc/httpd/{{ item }}
+    state: directory
+    mode: '0755'
+  with_items:
+   - sites-available
+   - sites-enabled
+
+
+- name: update main httpd configuation file
+  template:
+     src: centos-config.j2
+     dest: "/etc/httpd/conf/httpd.conf"
+     force: yes
+  notify:
+   - restart apache
+
+- name: Set up Apache virtuahHost
+  template:
+    src: tooling-config.j2
+    dest: /etc/httpd/sites-available/{{ http_host }}.conf
+   
+- name: Enable tooling website
+  file:
+    src: "/etc/httpd/sites-available/{{ http_host }}.conf"
+    dest: "/etc/httpd/sites-enabled/{{ http_host }}.conf"
+    state: link
+    force: yes
+  notify:
+   - restart apache
+
+- name: de-activate default httpd page
+  file:
+    path: /etc/httpd/conf.d/welcome.conf
+    mode: '0755'
+    state: absent
+  notify:
+   - restart apache
+
+# - name: Add enabled Nginx site to /etc/hosts
+#   lineinfile:
+#     dest: /etc/hosts
+#     regexp: "127.0.0.1"
+#     line: "35.222.190.156 {{ server_name }}"
+
+
+
+
+
+
+
+
+
+
+
+  
+
+# - name: copying function.php to the webserver
+#   template:
+#    src: function.php.j2
+#    dest: /var/www/html/tooling/html/{{ templating_functions }}
+#    owner: root
+#    group: root
+#    mode: 0600
+
+#   notify: restart httpd service

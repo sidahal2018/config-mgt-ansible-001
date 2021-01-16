@@ -1,0 +1,16 @@
+<VirtualHost *:{{ http_port }}>
+   ServerAdmin webmaster@{{ http_host }}
+   ServerName {{ http_host }}
+   ServerAlias www.{{ http_host }}/tooling/html
+   DocumentRoot /var/www/{{ http_host }}/tooling/html
+   
+
+   <Directory /var/www/{{ http_host }}/tooling/html>
+         Options -Indexes
+   </Directory>
+
+   <IfModule mod_dir.c>
+       DirectoryIndex index.php index.html index.cgi index.pl  index.xhtml index.htm
+   </IfModule>
+
+</VirtualHost>

@@ -1,0 +1,12 @@
+---
+- name: install necessary packages
+  package: name={{item}} update_cache=yes state=present
+  with_items:
+    - epel-release
+    - nginx
+    - git
+    - php
+    - php-gd
+    - php-mysqli
+  notify:
+   - start nginx 

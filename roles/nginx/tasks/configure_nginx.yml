@@ -1,33 +1,38 @@
 ---
+- name: clone tooling website from github
+  git:
+   repo: https://github.com/darey-io/tooling.git
+   dest: /var/www/html/tooling
+   clone: yes
+   force: yes
+
 - name: Creating sites-available directory on host for Nginx
   file:
-    path: /etc/nginx/sites-available
+    path: /etc/nginx/{{ item }}
     state: directory
     mode: '0755'
-
-- name: Creating  sites-enabled directory on host for Nginx
-  file:
-    path: /etc/nginx/sites-enabled
-    state: directory
-    mode: '0755'
+  with_items:
+   - sites-available
+   - sites-enabled
 
 
-- name: de-activate default nginx site
-  file:
-    path: /etc/nginx/sites-enabled/default
-    mode: '0755'
+- name: Deploy nginx configuation file
+  template:
+     src: nginx-tooling.j2
+     dest: "/etc/nginx/nginx.conf"
+     force: yes
   notify:
    - restart nginx
 
 - name: Deploy nginx configuation file
   template:
-     src: nginx.demo.j2
+     src: nginx-configuration.j2
      dest: "/etc/nginx/sites-available/{{ server_name }}.conf"
      force: yes
   notify:
    - restart nginx
 
-- name: Enable demo app website
+- name: Enable tooling website
   file:
     src: "/etc/nginx/sites-available/{{ server_name }}.conf"
     dest: "/etc/nginx/sites-enabled/{{ server_name }}.conf"
@@ -36,25 +41,19 @@
   notify:
    - restart nginx
 
-- name: clone tooling website from github
-  git:
-   repo: https://github.com/darey-io/tooling.git
-   dest: /var/www/tooling
-   clone: yes
-   force: yes
+- name: de-activate default nginx 
+  file:
+    path: /usr/share/nginx/html/index.html
+    mode: '0755'
+    state: absent
+  notify:
+   - restart nginx
 
 
 - name: Add enabled Nginx site to /etc/hosts
   lineinfile:
     dest: /etc/hosts
     regexp: "127.0.0.1"
-    line: "35.222.190.156 {{ server_name }}"
-
-# - name: copy the demo app html page 
-#   template:
-#     src: index.html.j2
-#     dest: /var/www/html/{{ demo_page }}.html
-#     mode: '0755'
-#     force: yes
-#   notify:
-#    - restart nginx    
+    line: "18.234.60.170 {{ server_name }}"
+  notify:
+   - restart nginx
