@@ -1,0 +1,4 @@
+---
+- import_tasks: install_haproxy.yml
+- import_tasks: haproxy_cfg.yml
+- import_tasks: configure_rsyslog.yml

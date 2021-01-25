@@ -2,7 +2,7 @@
 # tasks file for nginx
 - include_tasks: install-packages.yml
 - include_tasks: configure_nginx.yml
-# - include_tasks: setup-ssl.yml
-#   when: ansible_os_family == 'RedHat'
-# - include_tasks: auto-RenewalCron.yml
+- include_tasks: setup-ssl.yml
+  when: ansible_os_family == 'RedHat'
+- include_tasks: auto-RenewalCron.yml
 

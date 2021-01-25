@@ -3,9 +3,9 @@
 # certbot_site_names: "sikisharm.ml"
 server_name: "sikisharm.ml"
 tooling_root_dir: "/var/www/html/tooling/html"
-certbot_package: "python-certbot-nginx"
+certbot_package: "python3-certbot-nginx"
 certbot_plugin: "nginx"
-certbot_mail_address: sidahal@gmail.com
+certbot_mail_address: sidahal2018@gmail.com
 
 enable_nginx_lb: false
 load_balancer_is_required: false

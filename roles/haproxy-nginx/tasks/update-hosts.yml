@@ -1,0 +1,15 @@
+- name: upadte /etc/hosts file for load balancer
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "127.0.0.1"
+    line: "18.234.60.170 {{ server_name }}"
+  notify:
+   - restart nginx
+
+   - name: upadte /etc/hosts file webserver
+  lineinfile:
+    dest: /etc/hosts
+    regexp: "127.0.0.1"
+    line: "18.234.60.170 {{ server_name }}"
+  notify:
+   - restart nginx

@@ -8,14 +8,14 @@
     - always
 # - import_playbook: ../static-assignments/common.yml
 # - import_playbook:  ../static-assignments/webservers.yml
-# - import_playbook: ../roles/nginx.yml
+- import_playbook: ../roles/nginx.yml
 # - import_playbook: ../roles/apache.yml
 
 # - import_playbook: ../roles/mysql.yml
 # - import_playbook: ../roles/java.yml
 # - import_playbook: ../roles/jenkins.yml
-- import_playbook: ../static-assignments/loadbalancers.yml
-  when: load_balancer_is_required
+# - import_playbook: ../static-assignments/loadbalancers.yml
+#   when: load_balancer_is_required
   
 
 

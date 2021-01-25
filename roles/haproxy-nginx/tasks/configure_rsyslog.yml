@@ -1,0 +1,10 @@
+---
+- name: write rsyslog.conf
+  template: src=rsyslog.conf.j2 dest=/etc/rsyslog.conf
+
+- name: create /etc/rsyslog.d/haproxy.conf
+  template: src=haproxy.conf.j2 dest=/etc/rsyslog.d/haproxy.conf
+  notify:
+    - start rsyslog
+    - restart rsyslog
+    - start haproxy service

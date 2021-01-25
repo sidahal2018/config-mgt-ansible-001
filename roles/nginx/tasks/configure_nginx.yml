@@ -50,10 +50,10 @@
    - restart nginx
 
 
-- name: Add enabled Nginx site to /etc/hosts
-  lineinfile:
-    dest: /etc/hosts
-    regexp: "127.0.0.1"
-    line: "18.234.60.170 {{ server_name }}"
-  notify:
-   - restart nginx
+# - name: Add enabled Nginx site to /etc/hosts
+#   lineinfile:
+#     dest: /etc/hosts
+#     regexp: "127.0.0.1"
+#     line: "34.68.129.21 {{ server_name }}"
+#   notify:
+#    - restart nginx
