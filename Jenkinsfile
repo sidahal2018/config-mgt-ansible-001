@@ -29,11 +29,11 @@ pipeline {
       }
     }
       
-    stage('Execute Unit Tests') {
+   stage('Code Analysis') {
       steps {
-             sh './vendor/bin/phpunit'
-      
-      } 
-  }
+            sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
+      }
+    }
 }
 }
