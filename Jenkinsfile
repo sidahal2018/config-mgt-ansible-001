@@ -17,12 +17,9 @@ pipeline {
             git branch: 'main', url: 'https://github.com/darey-devops/php-todo.git'
       }
     }
-      
-   stage('Code Analysis') {
-      steps {
-            sh 'phploc app/ --log-csv build/logs/phploc.csv'
-
-      }
-    }
+ stage ('Package Artifact') {
+    steps {
+            sh 'zip -qr ${WORKSPACE}/php-todo.zip ${WORKSPACE}/*'
+}
 }
 }
