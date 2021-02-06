@@ -12,15 +12,16 @@ pipeline {
           }
         }
   
-    stage('Checkout SCM') {
+ stage('Execute Unit Tests') {
       steps {
-            git branch: 'main', url: 'https://github.com/darey-devops/php-todo.git'
+             sh './vendor/bin/phpunit'
+      } 
+ }
+stage('Code Analysis') {
+      steps {
+            sh 'phploc app/ --log-csv build/logs/phploc.csv'
+
       }
     }
- stage ('Package Artifact') {
-    steps {
-            sh 'zip -qr ${WORKSPACE}/php-todo.zip ${WORKSPACE}/*'
-}
-}
 }
 }
